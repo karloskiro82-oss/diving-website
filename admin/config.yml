@@ -13,3 +13,29 @@ collections:
     fields:
       - {label: "العنوان", name: "title", widget: "string"}
       - {label: "الوصف", name: "body", widget: "markdown"}
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "services"
+    label: "خدمات الغوص والأنشطة"
+    folder: "_posts/services"
+    create: true
+    fields:
+      - {label: "معرف الخدمة (ID)", name: "id", widget: "string"}
+      - {label: "الصورة الرئيسية", name: "image", widget: "image", default: "/images/sea.png"}
+      - {label: "السعر (€)", name: "price", widget: "string", required: false}
+      
+      # القسم الإنجليزي
+      - {label: "العنوان بالإنجليزية", name: "title_en", widget: "string"}
+      - {label: "الوصف بالإنجليزية", name: "description_en", widget: "text"}
+      - {label: "المشتملات بالإنجليزية", name: "includes_en", widget: "list"}
+      
+      # القسم الألماني
+      - {label: "العنوان بالألمانية", name: "title_de", widget: "string"}
+      - {label: "الوصف بالألمانية", name: "description_de", widget: "text"}
+      - {label: "المشتملات بالألمانية", name: "includes_de", widget: "list"}
