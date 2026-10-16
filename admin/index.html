@@ -1,98 +1,417 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>لوحة تحكم Turtle.d.c</title>
-  <!-- سكربت نظام الهوية من Netlify -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turtle.d.c - Diving & Snorkeling Center Hurghada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0b192c;
+      --card-bg: #1e293b;
+      --accent-blue: #00b4d8;
+      --accent-gold: #ffb703;
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --border-color: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(rgba(11, 25, 44, 0.85), rgba(11, 25, 44, 0.95)), url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80') center/cover;
+      padding: 60px 20px;
+      text-align: center;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto 40px auto;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent-blue);
+      letter-spacing: 1px;
+    }
+
+    .lang-switcher button {
+      background: transparent;
+      border: 1px solid var(--accent-blue);
+      color: var(--text-main);
+      padding: 6px 14px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .lang-switcher button.active, .lang-switcher button:hover {
+      background: var(--accent-blue);
+      color: #000;
+    }
+
+    .hero-title {
+      font-size: 42px;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-sub);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 40px;
+      color: var(--accent-blue);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .card-desc {
+      color: var(--text-sub);
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .price-tag {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 15px;
+    }
+
+    .price-tag span {
+      font-size: 14px;
+      color: var(--text-sub);
+      font-weight: 400;
+    }
+
+    .includes-list {
+      list-style: none;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .includes-list li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .includes-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+      font-weight: bold;
+    }
+
+    .btn-book {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--accent-blue);
+      color: #0b192c;
+      padding: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      margin-top: auto;
+      transition: 0.3s;
+    }
+
+    .btn-book:hover {
+      background: #0096c7;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-sub);
+      font-size: 14px;
+      margin-top: 60px;
+    }
+  </style>
 </head>
 <body>
-  <!-- سكربت لوحة التحكم Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <header>
+    <div class="top-nav">
+      <div class="logo">TURTLE.D.C</div>
+      <div class="lang-switcher">
+        <button id="btn-en" class="active" onclick="switchLang('en')">EN</button>
+        <button id="btn-de" onclick="switchLang('de')">DE</button>
+      </div>
+    </div>
+    <h1 class="hero-title" id="hero-title">Red Sea Diving Center</h1>
+    <p class="hero-subtitle" id="hero-subtitle">Explore the underwater magic of Hurghada with highly experienced certified professionals.</p>
+  </header>
+
+  <div class="container">
+    <h2 class="section-title" id="sec-title">Our Marine Activities</h2>
+    
+    <div class="services-grid">
+
+      <!-- 1. Certified Diving -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Recreational Diving" class="card-img">
+        <div class="card-body">
+          <h3 class="card-title" id="c1-title">Recreational Diving</h3>
+          <p class="card-desc" id="c1-desc">For certified divers of all levels, guided by expert instructors.</p>
+          <div class="price-tag">€50 <span id="c1-unit">/ day</span></div>
+          <ul class="includes-list">
+            <li id="c1-i1">Includes all equipment (except dive computer)</li>
+            <li id="c1-i2">Lunch & soft drinks on board included</li>
+            <li id="c1-i3">Dive computer available upon request</li>
+          </ul>
+          <button class="btn-book" onclick="bookWhatsApp('Recreational Diving')" id="c1-btn">Book Now</button>
+        </div>
+      </div>
+
+      <!-- 2. Beginner Diving -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Beginner Scuba Diving" class="card-img">
+        <div class="card-body">
+          <h3 class="card-title" id="c2-title">Beginner Diving</h3>
+          <p class="card-desc" id="c2-desc">No experience needed. Safe, fun, and easy intro dives with our pros.</p>
+          <div class="price-tag">€40 <span id="c2-unit">/ person</span></div>
+          <ul class="includes-list">
+            <li id="c2-i1">All equipment & full guidance included</li>
+            <li id="c2-i2">Free transfer within Hurghada</li>
+            <li id="c2-i3">Extra €30 transfer outside Hurghada</li>
+          </ul>
+          <button class="btn-book" onclick="bookWhatsApp('Beginner Diving')" id="c2-btn">Book Now</button>
+        </div>
+      </div>
+
+      <!-- 3. Diving Courses -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1582967788606-a171c1080cb0?auto=format&fit=crop&w=600&q=80" alt="Diving Courses" class="card-img">
+        <div class="card-body">
+          <h3 class="card-title" id="c3-title">PADI & CMAS Courses</h3>
+          <p class="card-desc" id="c3-desc">Turn your passion into certification! Professional training programs for all levels.</p>
+          <div class="price-tag" id="c3-price">Inquire for Price</div>
+          <ul class="includes-list">
+            <li id="c3-i1">Internationally recognized certifications</li>
+            <li id="c3-i2">Comprehensive practical & theory lessons</li>
+            <li id="c3-i3">Beginner to advanced diving courses</li>
+          </ul>
+          <button class="btn-book" onclick="bookWhatsApp('PADI & CMAS Courses')" id="c3-btn">Inquire Now</button>
+        </div>
+      </div>
+
+      <!-- 4. Snorkeling & Orange Bay Island -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=600&q=80" alt="Snorkeling and Swimming with Fishes" class="card-img">
+        <div class="card-body">
+          <h3 class="card-title" id="c4-title">Orange Bay Island & Snorkeling</h3>
+          <p class="card-desc" id="c4-desc">Relax at Orange Bay Island in Hurghada and explore vibrant coral reefs.</p>
+          <div class="price-tag">€25 <span id="c4-unit">/ person</span></div>
+          <ul class="includes-list">
+            <li id="c4-i1">Island stopover at Orange Bay Hurghada</li>
+            <li id="c4-i2">Full gear (mask, fins, snorkel & life jacket)</li>
+            <li id="c4-i3">Lunch, soft drinks & fresh fruits on board</li>
+          </ul>
+          <button class="btn-book" onclick="bookWhatsApp('Orange Bay Island Snorkeling')" id="c4-btn">Book Now</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Turtle.d.c Diving Center - Hurghada, Red Sea. All Rights Reserved.</p>
+  </footer>
+
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
+    const translations = {
+      en: {
+        heroTitle: "Red Sea Diving Center",
+        heroSubtitle: "Explore the underwater magic of Hurghada with highly experienced certified professionals.",
+        secTitle: "Our Marine Activities",
+        c1Title: "Recreational Diving",
+        c1Desc: "For certified divers of all levels, guided by expert instructors.",
+        c1Unit: "/ day",
+        c1I1: "Includes all equipment (except dive computer)",
+        c1I2: "Lunch & soft drinks on board included",
+        c1I3: "Dive computer available upon request",
+        c1Btn: "Book Now",
+        c2Title: "Beginner Diving",
+        c2Desc: "No experience needed. Safe, fun, and easy intro dives with our pros.",
+        c2Unit: "/ person",
+        c2I1: "All equipment & full guidance included",
+        c2I2: "Free transfer within Hurghada",
+        c2I3: "Extra €30 transfer outside Hurghada",
+        c2Btn: "Book Now",
+        c3Title: "PADI & CMAS Courses",
+        c3Desc: "Turn your passion into certification! Professional training programs for all levels.",
+        c3Price: "Inquire for Price",
+        c3I1: "Internationally recognized certifications",
+        c3I2: "Comprehensive practical & theory lessons",
+        c3I3: "Beginner to advanced diving courses",
+        c3Btn: "Inquire Now",
+        c4Title: "Orange Bay Island & Snorkeling",
+        c4Desc: "Relax at Orange Bay Island in Hurghada and explore vibrant coral reefs.",
+        c4Unit: "/ person",
+        c4I1: "Island stopover at Orange Bay Hurghada",
+        c4I2: "Full gear (mask, fins, snorkel & life jacket)",
+        c4I3: "Lunch, soft drinks & fresh fruits on board",
+        c4Btn: "Book Now"
+      },
+      de: {
+        heroTitle: "Rotes Meer Tauchzentrum",
+        heroSubtitle: "Entdecken Sie die Magie der Unterwasserwelt in Hurghada mit hocherfahrenen, zertifizierten Profis.",
+        secTitle: "Unsere Meeresaktivitäten",
+        c1Title: "Sporttauchen",
+        c1Desc: "Für zertifizierte Taucher aller Stufen, geführt von erfahrenen Tauchlehrern.",
+        c1Unit: "/ Tag",
+        c1I1: "Inklusive Ausrüstung (außer Tauchcomputer)",
+        c1I2: "Mittagessen & Erfrischungsgetränke an Bord inklusive",
+        c1I3: "Tauchcomputer auf Anfrage erhältlich",
+        c1Btn: "Jetzt Buchen",
+        c2Title: "Tauchen für Anfänger",
+        c2Desc: "Keine Erfahrung erforderlich. Sichere und einfache Schnuppertauchgänge.",
+        c2Unit: "/ Person",
+        c2I1: "Gesamte Ausrüstung & professionelle Betreuung inklusive",
+        c2I2: "Kostenloser Transfer innerhalb von Hurghada",
+        c2I3: "Zuzüglich €30 Transfer außerhalb von Hurghada",
+        c2Btn: "Jetzt Buchen",
+        c3Title: "PADI & CMAS Kurse",
+        c3Desc: "Verwandeln Sie Ihre Leidenschaft in ein Zertifikat! Professionelle Kurse.",
+        c3Price: "Preise auf Anfrage",
+        c3I1: "International anerkannte Zertifikate",
+        c3I2: "Umfassende praktische und theoretische Ausbildung",
+        c3I3: "Anfänger- bis Fortgeschrittenenkurse",
+        c3Btn: "Jetzt Anfragen",
+        c4Title: "Orange Bay Insel & Schnorcheln",
+        c4Desc: "Entspannen Sie auf Orange Bay Island in Hurghada und entdecken Sie Korallenriffe.",
+        c4Unit: "/ Person",
+        c4I1: "Inselaufenthalt auf Orange Bay Hurghada",
+        c4I2: "Vollständige Ausrüstung (Maske, Flossen, Schnorchel & Schwimmweste)",
+        c4I3: "Mittagessen, Erfrischungsgetränke & frisches Obst an Bord",
+        c4Btn: "Jetzt Buchen"
+      }
+    };
+
+    function switchLang(lang) {
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+
+      const data = translations[lang];
+      document.getElementById('hero-title').innerText = data.heroTitle;
+      document.getElementById('hero-subtitle').innerText = data.heroSubtitle;
+      document.getElementById('sec-title').innerText = data.secTitle;
+
+      document.getElementById('c1-title').innerText = data.c1Title;
+      document.getElementById('c1-desc').innerText = data.c1Desc;
+      document.getElementById('c1-unit').innerText = data.c1Unit;
+      document.getElementById('c1-i1').innerText = data.c1I1;
+      document.getElementById('c1-i2').innerText = data.c1I2;
+      document.getElementById('c1-i3').innerText = data.c1I3;
+      document.getElementById('c1-btn').innerText = data.c1Btn;
+
+      document.getElementById('c2-title').innerText = data.c2Title;
+      document.getElementById('c2-desc').innerText = data.c2Desc;
+      document.getElementById('c2-unit').innerText = data.c2Unit;
+      document.getElementById('c2-i1').innerText = data.c2I1;
+      document.getElementById('c2-i2').innerText = data.c2I2;
+      document.getElementById('c2-i3').innerText = data.c2I3;
+      document.getElementById('c2-btn').innerText = data.c2Btn;
+
+      document.getElementById('c3-title').innerText = data.c3Title;
+      document.getElementById('c3-desc').innerText = data.c3Desc;
+      document.getElementById('c3-price').innerText = data.c3Price;
+      document.getElementById('c3-i1').innerText = data.c3I1;
+      document.getElementById('c3-i2').innerText = data.c3I2;
+      document.getElementById('c3-i3').innerText = data.c3I3;
+      document.getElementById('c3-btn').innerText = data.c3Btn;
+
+      document.getElementById('c4-title').innerText = data.c4Title;
+      document.getElementById('c4-desc').innerText = data.c4Desc;
+      document.getElementById('c4-unit').innerText = data.c4Unit;
+      document.getElementById('c4-i1').innerText = data.c4I1;
+      document.getElementById('c4-i2').innerText = data.c4I2;
+      document.getElementById('c4-i3').innerText = data.c4I3;
+      document.getElementById('c4-btn').innerText = data.c4Btn;
+    }
+
+    function bookWhatsApp(serviceName) {
+      const phone = "201155828733";
+      const message = `Hello Turtle.d.c, I would like to inquire/book for: ${serviceName}`;
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
     }
   </script>
-</body><div style="text-align: center; margin: 20px 0;">
-  <a href="/admin/" style="color: #666; text-decoration: none; font-size: 14px;">🔒 لوحة التحكم</a>
-</div>
-</html><!-- Diving & Marine Activities Sections -->
-<section class="services-container">
-
-  <!-- 1. Certified / Recreational Diving -->
-  <article class="service-card">
-    <div class="service-image">
-      <img src="images/sea.png" alt="Recreational Diving in Hurghada">
-    </div>
-    <div class="service-content">
-      <h2>Recreational Diving</h2>
-      <p class="tagline">Explore the Red Sea with top-tier, highly experienced professional instructors.</p>
-      <div class="price-tag">€50 <span>/ day</span></div>
-      <ul class="details-list">
-        <li><strong>Included:</strong> Full equipment (except dive computer), lunch, and drinks on board.</li>
-        <li><strong>Note:</strong> Dive computer is not included in the package.</li>
-      </ul>
-      <a href="#book" class="btn-primary">Book Now</a>
-    </div>
-  </article>
-
-  <!-- 2. Beginner Diving / Intro Dives -->
-  <article class="service-card">
-    <div class="service-image">
-      <img src="images/sea.png" alt="Beginner Diving Experience">
-    </div>
-    <div class="service-content">
-      <h2>Beginner Diving Experience</h2>
-      <p class="tagline">Start your underwater journey safely with our expert guidance.</p>
-      <div class="price-tag">€40 <span>/ person</span></div>
-      <ul class="details-list">
-        <li><strong>Included:</strong> All diving gear, instruction, lunch, drinks, and local transfer within Hurghada.</li>
-        <li><strong>Transfers:</strong> Free within Hurghada. Extra €30 for pick-up outside Hurghada.</li>
-      </ul>
-      <a href="#book" class="btn-primary">Book Now</a>
-    </div>
-  </article>
-
-  <!-- 3. PADI & CMAS Courses -->
-  <article class="service-card">
-    <div class="service-image">
-      <img src="images/sea.png" alt="PADI and CMAS Diving Courses">
-    </div>
-    <div class="service-content">
-      <h2>PADI & CMAS Courses</h2>
-      <p class="tagline">Take your passion to the next level! Get internationally certified with our professional CMAS and PADI training programs.</p>
-      <div class="price-tag custom-price">Contact Us for Pricing</div>
-      <ul class="details-list">
-        <li>Comprehensive practical and theoretical training.</li>
-        <li>International certification upon completion.</li>
-      </ul>
-      <a href="#contact" class="btn-primary">Inquire Now</a>
-    </div>
-  </article>
-
-  <!-- 4. Snorkeling Trips -->
-  <article class="service-card">
-    <div class="service-image">
-      <img src="images/sea.png" alt="Snorkeling Excursions">
-    </div>
-    <div class="service-content">
-      <h2>Snorkeling Trips</h2>
-      <p class="tagline">Discover vibrant coral reefs and marine life from the surface.</p>
-      <div class="price-tag">€25 <span>/ person</span></div>
-      <ul class="details-list">
-        <li><strong>Included:</strong> Full snorkeling kit (mask, fins, snorkel), life jacket, lunch, soft drinks & fresh fruits on board.</li>
-        <li>Guided snorkeling stops at the best spots in Hurghada.</li>
-      </ul>
-      <a href="#book" class="btn-primary">Book Now</a>
-    </div>
-  </article>
-
-</section>
+</body>
+</html>
